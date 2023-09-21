@@ -1,0 +1,5 @@
+{
+    "src/**/*.{js,vue}": ["yarn fix:scripts"],
+    "src/**/*.{css,scss}": ["yarn fix:styles"],
+    "src/**/*.{css,scss,js,vue,json}": ["yarn fix:prettier"]
+}
