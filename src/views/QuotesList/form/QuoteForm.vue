@@ -8,14 +8,33 @@
 			:required="true"
 			:only-letter="true"
 		/>
+
 		<app-input
-			v-model="genre"
-			label="Жанр"
+			v-for="(_, index) in genres"
+			:key="index"
+			v-model="genres[index]"
+			:label="`Жанр ${index + 1}`"
 			placeholder="Введите жанр через запятой"
-			outer-class="mb-4"
+			outer-class="mb-2"
 			:required="true"
 			:only-letter="true"
 		/>
+
+		<div class="mb-4 flex items-center justify-start">
+			<app-button
+				v-if="hasGenres"
+				variant="outlined"
+				size="sm"
+				type="button"
+				class-name="mr-2"
+				@click="handleRemoveGenre"
+				>Убрать</app-button
+			>
+			<app-button variant="primary" size="sm" type="button" @click="handleAddGenre"
+				>Добавить</app-button
+			>
+		</div>
+
 		<app-input
 			v-model="text"
 			rows="20"
@@ -59,14 +78,28 @@ export default {
 	data() {
 		return {
 			author: this.$props.defaultValues.author || "",
-			genre: this.$props.defaultValues.genre || "",
+			genres: this.$props.defaultValues.genres || [""],
 			text: this.$props.defaultValues.text || "",
 		};
 	},
 
+	computed: {
+		hasGenres() {
+			return this.genres.length > 1;
+		},
+	},
+
 	methods: {
+		handleAddGenre() {
+			this.genres.push("");
+		},
+
+		handleRemoveGenre() {
+			this.genres.pop();
+		},
+
 		handleSubmit() {
-			this.$emit("onSubmit", { text: this.text, author: this.author, genre: this.genre });
+			this.$emit("onSubmit", { text: this.text, author: this.author, genres: this.genres });
 		},
 	},
 };

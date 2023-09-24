@@ -8,7 +8,7 @@ export const quoteModule = {
 			{
 				id: time.getNow(),
 				text: "Test",
-				genre: "This is message",
+				genres: "This is message",
 				author: "Me",
 				createdAt: time.getNow(),
 				updatedAt: time.getNow(),
@@ -20,11 +20,10 @@ export const quoteModule = {
 			state.quotes = state.quotes.filter((item) => item.id !== quoteId);
 		},
 		add(state, quote) {
-			console.log("INSIDE ADD");
 			const newQuote = {
 				id: time.getNow(),
 				text: quote.text,
-				genre: quote.genre,
+				genres: quote.genres,
 				author: quote.author,
 				createdAt: time.getNow(),
 				updatedAt: time.getNow(),
@@ -71,7 +70,7 @@ export const quoteModule = {
 							id: selectedQuote.id,
 							text: selectedQuote.text,
 							author: selectedQuote.author,
-							genre: selectedQuote.genre,
+							genres: selectedQuote.genres,
 							createdAt: time.format(selectedQuote.createdAt),
 							updatedAt: time.format(selectedQuote.updatedAt),
 					  }
