@@ -7,6 +7,7 @@ module.exports = {
 	],
 	plugins: ["stylelint-order", "stylelint-prettier"],
 	rules: {
+		"media-feature-range-notation": null,
 		"function-name-case": null,
 		"no-empty-source": null,
 		"declaration-empty-line-before": null,
