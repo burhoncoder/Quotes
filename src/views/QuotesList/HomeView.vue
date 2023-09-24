@@ -1,6 +1,8 @@
 <template>
 	<div class="mb-4 flex items-center justify-between">
-		<app-text tag="h2" size="2" weight="bold">Список цитат</app-text>
+		<app-text tag="h2" size="5" weight="bold" class-name="sm:text-4 md:text-3 lg:text-2"
+			>Список цитат</app-text
+		>
 		<app-button variant="primary" size="lg" @click="handleFormOpen">Создать</app-button>
 	</div>
 

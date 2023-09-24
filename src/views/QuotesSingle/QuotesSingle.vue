@@ -4,10 +4,10 @@
 		:key="key"
 		class="mb-4 flex items-center justify-between"
 	>
-		<app-text tag="p" size="lg" weight="bold" class-name="text-primary-600">
+		<app-text tag="p" size="md" weight="bold" class-name="text-primary-600 sm:text-lg">
 			{{ key }}:
 		</app-text>
-		<app-text tag="p" size="lg" weight="medium">{{ value }}</app-text>
+		<app-text tag="p" size="md" weight="medium" class-name=" sm:text-lg">{{ value }}</app-text>
 	</div>
 </template>
 

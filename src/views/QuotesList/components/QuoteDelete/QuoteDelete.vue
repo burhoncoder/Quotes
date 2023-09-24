@@ -13,10 +13,11 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 import AppModal from "@/components/organisms/Modal/Modal.vue";
 import AppText from "@/components/atoms/Text/Text.vue";
 import AppButton from "@/components/atoms/Button/Button.vue";
-import { mapMutations } from "vuex";
 
 export default {
 	name: "QuoteDelete",

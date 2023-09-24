@@ -78,3 +78,12 @@
 		opacity: 0.5;
 	}
 }
+
+@media (max-width: 575px) {
+	.btn {
+		&_size-lg {
+			height: 40px;
+			padding: 8px 16px;
+		}
+	}
+}
