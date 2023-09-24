@@ -8,7 +8,7 @@ export const quoteModule = {
 			{
 				id: time.getNow(),
 				text: "Test",
-				genres: "This is message",
+				genres: ["This is message"],
 				author: "Me",
 				createdAt: time.getNow(),
 				updatedAt: time.getNow(),
