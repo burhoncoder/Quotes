@@ -16,6 +16,8 @@
 		/>
 		<app-input
 			v-model="text"
+			rows="20"
+			tag="textarea"
 			label="Текст"
 			placeholder="Введите текст"
 			:required="true"

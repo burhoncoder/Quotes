@@ -5,7 +5,8 @@
 		}}</app-text>
 
 		<div class="input__container">
-			<input
+			<component
+				:is="tag"
 				type="text"
 				:required="required"
 				:placeholder="placeholder"
@@ -26,6 +27,10 @@ export default {
 	name: "AppInput",
 	components: { AppText },
 	props: {
+		tag: {
+			type: String,
+			default: "input",
+		},
 		outerClass: {
 			type: String,
 			default: "",
