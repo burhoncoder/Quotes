@@ -1,8 +1,15 @@
 <template>
-	<div class="flex items-center justify-between">
+	<div class="mb-4 flex items-center justify-between">
 		<app-text tag="h2" size="2" weight="bold">Список цитат</app-text>
 		<app-button variant="primary" size="lg" @click="handleFormOpen">Создать</app-button>
 	</div>
+
+	<app-input
+		v-model="searchText"
+		placeholder="Поиск по автору или тексту"
+		outer-class="mb-2"
+		:required="true"
+	/>
 
 	<app-table
 		:columns="columns"
@@ -21,17 +28,18 @@
 	<quote-modal :is-open="formState" :quote-id="selectedItemId" @on-close="handleFormClose" />
 </template>
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 
 import AppButton from "@/components/atoms/Button/Button.vue";
 import AppText from "@/components/atoms/Text/Text.vue";
 import AppTable from "@/components/organisms/Table/Table.vue";
 import QuoteDelete from "@/views/QuotesList/components/QuoteDelete/QuoteDelete.vue";
 import QuoteModal from "@/views/QuotesList/components/QuoteModal/QuoteModal.vue";
+import AppInput from "@/components/molecules/Input/Input.vue";
 
 export default {
 	name: "HomeView",
-	components: { QuoteModal, QuoteDelete, AppTable, AppText, AppButton },
+	components: { AppInput, QuoteModal, QuoteDelete, AppTable, AppText, AppButton },
 	data() {
 		return {
 			columns: [
@@ -41,13 +49,14 @@ export default {
 			deleteModalState: false,
 			selectedItemId: null,
 			formState: false,
+			searchText: "",
 		};
 	},
 
 	computed: {
-		...mapGetters({
-			formattedQuotes: "quoteModule/formattedQuotes",
-		}),
+		formattedQuotes() {
+			return this.$store.getters["quoteModule/formattedQuotes"](this.searchText);
+		},
 	},
 
 	methods: {

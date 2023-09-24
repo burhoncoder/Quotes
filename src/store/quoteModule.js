@@ -1,4 +1,5 @@
 import { time } from "@/utils/time";
+import { helpers } from "@/utils/helpers";
 
 export const quoteModule = {
 	namespaced: true,
@@ -43,11 +44,24 @@ export const quoteModule = {
 	},
 	getters: {
 		formattedQuotes(state) {
-			return state.quotes.map((item) => ({
-				id: item.id,
-				author: item.author,
-				createdAt: time.format(item.createdAt),
-			}));
+			return (searchQuery) =>
+				!searchQuery
+					? state.quotes.map((item) => ({
+							id: item.id,
+							author: item.author,
+							createdAt: time.format(item.createdAt),
+					  }))
+					: state.quotes
+							.filter(
+								(item) =>
+									helpers.compareStr(item.text, searchQuery) ||
+									helpers.compareStr(item.author || searchQuery)
+							)
+							.map((item) => ({
+								id: item.id,
+								author: item.author,
+								createdAt: time.format(item.createdAt),
+							}));
 		},
 		getQuote(state) {
 			return (id) => {
