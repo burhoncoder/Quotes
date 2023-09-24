@@ -6,6 +6,7 @@
 			placeholder="Введите автора"
 			outer-class="mb-4"
 			:required="true"
+			:only-letter="true"
 		/>
 		<app-input
 			v-model="genre"
@@ -13,6 +14,7 @@
 			placeholder="Введите жанр через запятой"
 			outer-class="mb-4"
 			:required="true"
+			:only-letter="true"
 		/>
 		<app-input
 			v-model="text"

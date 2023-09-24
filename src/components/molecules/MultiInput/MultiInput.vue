@@ -5,14 +5,12 @@
 		}}</app-text>
 
 		<div class="input__container">
-			<component
-				:is="tag"
+			<input
 				type="text"
 				:required="required"
 				:placeholder="placeholder"
 				class="input__field input__field_lg input__field_outlined"
 				:value="modelValue"
-				@keypress="checkLetter($event)"
 				@input="updateValue"
 			/>
 		</div>
@@ -23,19 +21,12 @@
 import AppText from "@/components/atoms/Text/Text.vue";
 
 import "@/components/molecules/Input/Input.scss";
+import "@/components/molecules/MultiInput/MultiInput.scss";
 
 export default {
-	name: "AppInput",
+	name: "MultiInput",
 	components: { AppText },
 	props: {
-		tag: {
-			type: String,
-			default: "input",
-		},
-		onlyLetter: {
-			type: Boolean,
-			default: false,
-		},
 		outerClass: {
 			type: String,
 			default: "",
@@ -57,13 +48,6 @@ export default {
 	emits: ["update:modelValue"],
 
 	methods: {
-		checkLetter(event) {
-			let char = String.fromCharCode(event.keyCode);
-			if (!/^[A-Za-z]+$/.test(char) && this.$props.onlyLetter) {
-				event.preventDefault();
-			}
-		},
-
 		updateValue(event) {
 			this.$emit("update:modelValue", event.target.value);
 		},
