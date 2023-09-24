@@ -10,7 +10,7 @@
 				:required="required"
 				:placeholder="placeholder"
 				class="input__field input__field_lg input__field_outlined"
-				:value="value"
+				:value="modelValue"
 				@input="updateValue"
 			/>
 		</div>
@@ -42,12 +42,13 @@ export default {
 			type: Boolean,
 			default: false,
 		},
-		value: [String, Number],
+		modelValue: [String, Number],
 	},
+	emits: ["update:modelValue"],
 
 	methods: {
 		updateValue(event) {
-			this.$emit("input", event.target.value);
+			this.$emit("update:modelValue", event.target.value);
 		},
 	},
 };
