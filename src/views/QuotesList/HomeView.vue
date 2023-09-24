@@ -4,20 +4,21 @@
 		<app-button variant="primary" size="lg" @click="handleFormOpen">Создать</app-button>
 	</div>
 
+	<app-table
+		:columns="columns"
+		:data="formattedQuotes"
+		@on-delete="handleDeleteModalOpen"
+		@on-edit="handleUpdate"
+		@on-row-click="handleRowClick"
+	/>
+
 	<quote-delete
 		:is-open="deleteModalState"
 		:quote-id="selectedItemId"
 		@on-close="handleDeleteModalClose"
 	/>
 
-	<app-table
-		:columns="columns"
-		:data="formattedQuotes"
-		@on-delete="handleDeleteModalOpen"
-		@on-row-click="handleRowClick"
-	/>
-
-	<quote-modal :is-open="formState" @on-close="handleFormClose" />
+	<quote-modal :is-open="formState" :quote-id="selectedItemId" @on-close="handleFormClose" />
 </template>
 <script>
 import { mapGetters, mapMutations } from "vuex";
@@ -56,19 +57,25 @@ export default {
 		handleRowClick(id) {
 			this.$router.push(`/quotes/${id}`);
 		},
+
 		handleDeleteModalOpen(id) {
 			this.selectedItemId = id;
 			this.deleteModalState = true;
 		},
 		handleDeleteModalClose() {
-			this.selectedItemId = false;
+			this.selectedItemId = null;
 			this.deleteModalState = false;
+		},
+
+		handleUpdate(id) {
+			this.selectedItemId = id;
+			this.handleFormOpen();
 		},
 		handleFormOpen() {
 			this.formState = true;
 		},
-
 		handleFormClose() {
+			this.selectedItemId = null;
 			this.formState = false;
 		},
 	},

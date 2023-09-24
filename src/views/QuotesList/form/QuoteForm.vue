@@ -41,16 +41,25 @@ import AppInput from "@/components/molecules/Input/Input.vue";
 import AppButton from "@/components/atoms/Button/Button.vue";
 
 export default {
-	name: "CreateForm",
+	name: "QuoteForm",
 	components: { AppButton, AppInput },
+	props: {
+		defaultValues: {
+			type: Object,
+			default: () => {
+				return {};
+			},
+		},
+	},
 	emits: ["onCancel", "onSubmit"],
 	data() {
 		return {
-			author: "",
-			genre: "",
-			text: "",
+			author: this.$props.defaultValues.author || "",
+			genre: this.$props.defaultValues.genre || "",
+			text: this.$props.defaultValues.text || "",
 		};
 	},
+
 	methods: {
 		handleSubmit() {
 			this.$emit("onSubmit", { text: this.text, author: this.author, genre: this.genre });

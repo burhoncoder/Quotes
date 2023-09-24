@@ -29,7 +29,7 @@
 					</td>
 					<td class="table__td">
 						<div class="flex items-center justify-end">
-							<button class="mr-4" @click.stop="$emit('onEdit')">
+							<button class="mr-4" @click.stop="$emit('onEdit', row.id)">
 								<img src="@/assets/icons/edit.svg" alt="" />
 							</button>
 							<button @click.stop="$emit('onDelete', row.id)">

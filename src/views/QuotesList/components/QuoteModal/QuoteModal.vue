@@ -1,30 +1,41 @@
 <template>
 	<app-modal :is-open="isOpen" @on-close="handleClose">
-		<create-form @on-cancel="handleClose" @on-submit="modifyQuote" />
+		<quote-form :default-values="getQuote" @on-cancel="handleClose" @on-submit="modifyQuote" />
 	</app-modal>
 </template>
 
 <script>
-import CreateForm from "@/views/QuotesList/form/QuoteForm.vue";
-import AppModal from "@/components/organisms/Modal/Modal.vue";
 import { mapMutations } from "vuex";
+
+import QuoteForm from "@/views/QuotesList/form/QuoteForm.vue";
+import AppModal from "@/components/organisms/Modal/Modal.vue";
 
 export default {
 	name: "QuoteModal",
 	components: {
 		AppModal,
-		CreateForm,
+		QuoteForm,
 	},
 	props: {
 		isOpen: {
 			type: Boolean,
 			default: false,
 		},
+		quoteId: {
+			type: Number,
+			default: null,
+		},
 	},
 	emits: ["onClose"],
+	computed: {
+		getQuote() {
+			return this.$store.getters["quoteModule/getQuote"](this.$props.quoteId);
+		},
+	},
 	methods: {
 		...mapMutations({
 			addQuote: "quoteModule/add",
+			updateQuote: "quoteModule/updateQuote",
 		}),
 
 		handleClose() {
@@ -32,7 +43,9 @@ export default {
 		},
 
 		modifyQuote(quote) {
-			this.addQuote(quote);
+			if (this.$props.quoteId) this.updateQuote({ ...this.getQuote, ...quote });
+			else this.addQuote(quote);
+
 			this.handleClose();
 		},
 	},

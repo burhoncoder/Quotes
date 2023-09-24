@@ -19,6 +19,7 @@ export const quoteModule = {
 			state.quotes = state.quotes.filter((item) => item.id !== quoteId);
 		},
 		add(state, quote) {
+			console.log("INSIDE ADD");
 			const newQuote = {
 				id: time.getNow(),
 				text: quote.text,
@@ -28,6 +29,16 @@ export const quoteModule = {
 				updatedAt: time.getNow(),
 			};
 			state.quotes.push(newQuote);
+		},
+		updateQuote(state, quote) {
+			console.log("INSIDE Update");
+			const selectedItemIndex = state.quotes.findIndex((item) => item.id === quote.id);
+			if (selectedItemIndex > -1) {
+				state.quotes[selectedItemIndex] = {
+					...quote,
+					updatedAt: time.getNow(),
+				};
+			}
 		},
 	},
 	getters: {
